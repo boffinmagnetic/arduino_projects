@@ -1,0 +1,301 @@
+struct Object
+{
+    int8_t x, y;
+    uint8_t w, h;
+    Object(int8_t x, int8_t y, uint8_t w, uint8_t h) : x(x), y(y), w(w), h(h) {}
+    bool Collided(const Object second)
+    {
+        return x < second.x + second.w && x + w > second.x &&
+               y < second.y + second.h && y + h > second.y;
+    }
+};
+struct Pos
+{
+    int8_t x, y;
+    bool vizible;
+    Pos(int8_t x, int8_t y) : x(x), y(y), vizible(true) {}
+};
+
+struct Level
+{
+    uint8_t platform_size;
+    Object *platform;
+    uint8_t coin_size;
+    Pos *coin;
+
+    void AllocPlatform(const uint8_t size)
+    {
+        if (platform != NULL)
+            free(platform);
+        platform_size = size;
+        platform = (Object *)malloc(platform_size * sizeof(Object));
+    }
+    void AllocCoin(const uint8_t size)
+    {
+        if (coin != NULL)
+            free(coin);
+        coin_size = size;
+        coin = (Pos *)malloc(coin_size * sizeof(Pos));
+    }
+    void Reset()
+    {
+        for (uint8_t i = platform_size - 1; i > 0; i--)
+            platform[i].x -= platform[0].x;
+        for (uint8_t i = 0; i < coin_size; i++)
+        {
+            coin[i].x -= platform[0].x;
+            coin[i].vizible = true;
+        }
+        platform[0].x = 0;
+    }
+    void Fill(const uint8_t level_num)
+    {
+        switch (level_num)
+        {
+        case 0:
+            AllocPlatform(12);
+            platform[0] = {0, 0, 0, 0};
+            platform[1] = {53, 0, 5, 64};
+            platform[2] = {57, 42, 20, 5};
+            platform[3] = {100, 40, 10, 5};
+            platform[4] = {120, 20, 10, 5};
+            platform[5] = {140, 59, 10, 5};
+            platform[6] = {160, 40, 15, 5};
+            platform[7] = {185, 59, 10, 5};
+            platform[8] = {230, 35, 10, 5};
+            platform[9] = {250, 59, 25, 5},
+            platform[10] = {275, 20, 15, 5};
+            platform[11] = {285, 24, 5, 40};
+
+            AllocCoin(3);
+            coin[0] = {120, 30};
+            coin[1] = {208, 42};
+            coin[2] = {294, 53};
+
+            break;
+        case 1:
+            AllocPlatform(13);
+            platform[0] = {0, 0, 0, 0};
+            platform[1] = {53, 0, 5, 64};
+            platform[2] = {57, 42, 40, 5};
+            platform[3] = {130, 59, 10, 5};
+            platform[4] = {150, 24, 5, 16};
+            platform[5] = {150, 20, 10, 5};
+            platform[6] = {170, 59, 10, 5};
+            platform[7] = {190, 20, 10, 5};
+            platform[8] = {210, 40, 10, 5};
+            platform[9] = {220, 59, 20, 5};
+            platform[10] = {255, 40, 20, 5};
+            platform[11] = {275, 59, 20, 5};
+            platform[12] = {289, 0, 5, 35};
+
+            AllocCoin(3);
+            coin[0] = {150, 9};
+            coin[1] = {150, 53};
+            coin[2] = {296, 2};
+
+            break;
+        case 2:
+            AllocPlatform(10);
+            platform[0] = {0, 0, 0, 0};
+            platform[1] = {53, 0, 5, 64};
+            platform[2] = {57, 59, 15, 5};
+            platform[3] = {57, 23, 20, 5};
+            platform[4] = {120, 59, 15, 5};
+            platform[5] = {118, 23, 20, 5};
+            platform[6] = {183, 59, 15, 5};
+            platform[7] = {181, 23, 20, 5};
+            platform[8] = {246, 59, 15, 5};
+            platform[9] = {244, 25, 20, 5};
+
+            AllocCoin(3);
+            coin[0] = {60, 9};
+            coin[1] = {154, 53};
+            coin[2] = {297, 1};
+
+            break;
+        }
+    }
+};
+
+const uint8_t PROGMEM boffin_right_pic[] = {
+    0x9a, 0xa0,
+    0x6f, 0x60,
+    0x3f, 0xd0,
+    0xff, 0xe0,
+    0x6c, 0xc0,
+    0x27, 0xc0,
+    0x6b, 0x40,
+    0xbb, 0x40,
+    0x64, 0xc0,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x0a, 0x00,
+    0x1f, 0x00,
+    0x25, 0x80,
+    0x2d, 0x80,
+    0x2d, 0x80,
+    0x3f, 0x80,
+    0x15, 0x00,
+    0x15, 0x00,
+    0x1f, 0x00};
+const uint8_t PROGMEM boffin_left_pic[] = {
+    0x55, 0x90,
+    0x6f, 0x60,
+    0xbf, 0xc0,
+    0x7f, 0xf0,
+    0x33, 0x60,
+    0x3e, 0x40,
+    0x2d, 0x60,
+    0x2d, 0xd0,
+    0x32, 0x60,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x05, 0x00,
+    0x0f, 0x80,
+    0x1a, 0x40,
+    0x1b, 0x40,
+    0x1b, 0x40,
+    0x1f, 0xc0,
+    0x0a, 0x80,
+    0x0a, 0x80,
+    0x0f, 0x80};
+const uint8_t PROGMEM boffin_walk_right_1[] = {
+    0x35, 0x40,
+    0xef, 0x50,
+    0x3f, 0xd0,
+    0xff, 0xe0,
+    0x6c, 0xc0,
+    0x27, 0xc0,
+    0x6b, 0x40,
+    0xbb, 0x40,
+    0x64, 0xc0,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x0a, 0x00,
+    0x1f, 0x00,
+    0x29, 0x80,
+    0x25, 0x80,
+    0x13, 0x00,
+    0x0f, 0x00,
+    0x15, 0x00,
+    0x2a, 0x80,
+    0x31, 0x80};
+const uint8_t PROGMEM boffin_walk_right_2[] = {
+    0x35, 0x40,
+    0xef, 0x50,
+    0x3f, 0xd0,
+    0xff, 0xe0,
+    0x6c, 0xc0,
+    0x27, 0xc0,
+    0x6b, 0x40,
+    0xbb, 0x40,
+    0x64, 0xc0,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x0a, 0x00,
+    0x1f, 0x00,
+    0x29, 0x80,
+    0x49, 0x40,
+    0x99, 0xa0,
+    0x6f, 0x60,
+    0x19, 0x00,
+    0x2c, 0x80,
+    0x33, 0x80};
+const uint8_t PROGMEM boffin_walk_left_1[] = {
+    0x2a, 0xc0,
+    0xaf, 0x70,
+    0xbf, 0xc0,
+    0x7f, 0xf0,
+    0x33, 0x60,
+    0x3e, 0x40,
+    0x2d, 0x60,
+    0x2d, 0xd0,
+    0x32, 0x60,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x05, 0x00,
+    0x0f, 0x80,
+    0x19, 0x40,
+    0x1a, 0x40,
+    0x0c, 0x80,
+    0x0f, 0x00,
+    0x0a, 0x80,
+    0x15, 0x40,
+    0x18, 0xc0};
+const uint8_t PROGMEM boffin_walk_left_2[] = {
+    0x2a, 0xc0,
+    0xaf, 0x70,
+    0xbf, 0xc0,
+    0x7f, 0xf0,
+    0x33, 0x60,
+    0x3e, 0x40,
+    0x2d, 0x60,
+    0x2d, 0xd0,
+    0x32, 0x60,
+    0x10, 0x80,
+    0x0f, 0x00,
+    0x05, 0x00,
+    0x0f, 0x80,
+    0x19, 0x40,
+    0x29, 0x20,
+    0x59, 0x90,
+    0x6f, 0x60,
+    0x09, 0x80,
+    0x13, 0x40,
+    0x1c, 0xc0};
+const uint8_t PROGMEM boffin_jump_left[] = {
+    0x05, 0x80,
+    0x6f, 0x60,
+    0x3f, 0xd0,
+    0xff, 0xe0,
+    0x33, 0x70,
+    0x3e, 0x40,
+    0x2d, 0x60,
+    0x2d, 0xd0,
+    0x32, 0x60,
+    0x20, 0x80,
+    0x7f, 0x00,
+    0x5c, 0x80,
+    0x2a, 0x40,
+    0x19, 0xc0,
+    0x08, 0x80,
+    0x08, 0x80,
+    0x0f, 0x80,
+    0x0a, 0x80,
+    0x05, 0x40,
+    0x07, 0xc0};
+const uint8_t PROGMEM boffin_jump_right[] = {
+    0x1a, 0x00,
+    0x6f, 0x60,
+    0xbf, 0xc0,
+    0x7f, 0xf0,
+    0xec, 0xc0,
+    0x27, 0xc0,
+    0x6b, 0x40,
+    0xbb, 0x40,
+    0x64, 0xc0,
+    0x10, 0x40,
+    0x0f, 0xe0,
+    0x13, 0xa0,
+    0x25, 0x40,
+    0x39, 0x80,
+    0x11, 0x00,
+    0x11, 0x00,
+    0x1f, 0x00,
+    0x15, 0x00,
+    0x2a, 0x00,
+    0x3e, 0x00};
+
+const uint8_t PROGMEM coin_pic[] = {
+    0x1e, 0x00,
+    0x21, 0x00,
+    0x48, 0x80,
+    0x9c, 0x40,
+    0x8a, 0x40,
+    0x8c, 0x40,
+    0x8a, 0x40,
+    0x9c, 0x40,
+    0x48, 0x80,
+    0x21, 0x00,
+    0x1e, 0x00};

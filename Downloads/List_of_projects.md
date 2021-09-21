@@ -3,8 +3,8 @@
 ## Available/used slots
 |   0|   1|   2|   3|   4|   5|   6|   7|   8|   9|
 |----|----|----|----|----|----|----|----|----|----|
-|<span style="background-color:red"/>000 |<span style="background-color:red"/>001 |<span style="background-color:red"/>002 |<span style="background-color:red"/>003 |<span style="background-color:red"/>004 |<span style="background-color:red"/>005 |<span style="background-color:red"/> 006| <span style="background-color:red"/> 007| <span style="background-color:red"/>008| <span style="background-color:red"/> 009|
-|<span style="background-color:red"/>010 |<span style="background-color:red"/>011 |<span style="background-color:red"/>012 |<span style="background-color:red"/>013 |014 |015 | 016|  017| 018|  019|
+|<span style="background-color:red"/> 000|<span style="background-color:red"/> 001|<span style="background-color:red"/> 002|<span style="background-color:red"/> 003|<span style="background-color:red"/> 004|<span style="background-color:red"/> 005|<span style="background-color:red"/> 006|<span style="background-color:red"/> 007|<span style="background-color:red"/> 008|<span style="background-color:red"/> 009|
+|<span style="background-color:red"/> 010|<span style="background-color:red"/> 011|<span style="background-color:red"/> 012|<span style="background-color:red"/> 013|<span style="background-color:red"/> 014|<span style="background-color:red"/> 015|<span style="background-color:red"/> 016|<span style="background-color:red"/> 017| 018| 019|
 | 020| 021| 022| 023| 024| 025| 026| 027| 028| 029|
 | 030| 031|<span style="background-color:red"/> 032|<span style="background-color:red"/> 033|<span style="background-color:red"/> 034|<span style="background-color:red"/> 035|<span style="background-color:red"/> 036| 037| 038| 039|
 | 040| 041| 042| 043| 044| 045| 046| 047| 048| 049|
@@ -22,17 +22,21 @@
 |----------|-----------------------------------|-------------------|
 | 001.bin  | Platform Game with Boffin         | November 27, 2020 |
 | 002.bin  | Ping Pong Multiplayer             | November 27, 2020 |
-| 003.bin  | Tetris Game                       | November 27, 2020 |
+| 003.bin  | Tetris                            | November 27, 2020 |
 | 004.bin  | Roxy Catching Bones               | November 27, 2020 |
 | 005.bin  | Ping Pong Singleplayer            | November 27, 2020 |
-| 006.bin  | Brick Shooter                     | November 27, 2020 |
+| 006.bin  | Shooting Down Dice                | November 27, 2020 |
 | 007.bin  | Space Shooter                     | November 27, 2020 |
-| 008.bin  | Racing Game                       | November 27, 2020 |
+| 008.bin  | Racing Game I                     | November 27, 2020 |
 | 009.bin  | Racing Game II                    | November 27, 2020 |
 | 010.bin  | Snake                             | November 27, 2020 |
-| 011.bin  | Boffin Jumping Game               | November 27, 2020 |
-| 012.bin  | Math Problem Game                 | November 27, 2020 |
-| 013.bin  | First Press Game                  | November 27, 2020 |
+| 011.bin  | Jumping with Boffin               | November 27, 2020 |
+| 012.bin  | Logic Game with Boffin            | November 27, 2020 |
+| 013.bin  | Fast Reflexes                     | November 27, 2020 |
+| 014.bin  | Octopus                           | August   04, 2020 |
+| 015.bin  | Tower Builder                     | August   04, 2020 |
+| 016.bin  | Battleship                        | August   04, 2020 |
+| 017.bin  | Tic-tac-toe                       | August   04, 2020 |
 
 ## Measure functions
 | File     | Content                           | Released          |
